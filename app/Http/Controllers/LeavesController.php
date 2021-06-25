@@ -11,7 +11,7 @@ class LeavesController extends Controller
     public function BlightList()
     {
         //서비스키
-        $apiKey = "";
+        $apiKey = env('apiKey');
         //요청변수들
         $serviceCode = "SVC01";
         $serviceType = "AA001";
