@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use phpDocumentor\Reflection\DocBlock\Tags\Property;
 
 class DiseaseController extends Controller
 {
@@ -61,6 +62,22 @@ class DiseaseController extends Controller
 
     }
 
+    /**
+     * xml 호출
+     *
+     * @param String $param api 요청변수
+     *
+     * @return Property xml 배열
+     */
+    public function call_api(string $param)
+    {
+        $apiKey = env('apiKey');
+        $parameter = "apiKey=" . $apiKey.$param;
+        $url = "http://ncpms.rda.go.kr/npmsAPI/service?" . $parameter;
+        $test = Http::GET($url);
+        $xml = simplexml_load_string($test);
+        return $xml;
+    }
 
 
 }
