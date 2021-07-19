@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 
@@ -79,6 +82,23 @@ class DiseaseController extends Controller
         return $xml;
     }
 
-
+    /**
+     *
+     * 컬렉션 페이지네이션
+     *
+     *
+     * @param array|Collection $items 컬렉션 배열
+     * @param int $perPage 페이지네이션 해줄 갯수
+     * @param int $page 초기 페이지 Null
+     * @param array $options 옵션
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
 }
 
