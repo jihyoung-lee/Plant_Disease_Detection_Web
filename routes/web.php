@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiseaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');});
 
 /* Disease list */
-Route::match(['post','get'],[DiseaseController::class, 'disease_list'])->name('disease.list');
+Route::match(['post','get'],'/list',[DiseaseController::class, 'disease_list'])->name('disease.list');
