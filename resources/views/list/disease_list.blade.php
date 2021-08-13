@@ -22,12 +22,15 @@
             <form action="/test/" method="POST">
                 @csrf
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Search for..." name="search" required value="{{$paramSearch}}">
+                    <input type="text" class="form-control" placeholder="검색어를 입력하세요" name="search" required value="{{$paramSearch}}">
                     <span class="input-group-btn">
-            <button class="btn btn-success btn-lg"><i class="bi bi-search"></i>검색</button></span>
+                <button class="btn btn-success btn-lg"><i class="bi bi-search"></i>검색</button></span>
+
+                <select name="type" class="form-select form-select" aria-label=".form-select-lg keyword">
+                    <option value="1"@if($type == 1) selected @endif>작물 명</option>
+                    <option value="2"@if($type == 2) selected @endif>병 명</option>
+                </select>
                 </div>
-                <input type="radio" name="type" value="1" @if($type == 1) checked="checked"@endif>작물
-                <input type="radio" name="type" value="2"@if($type ==2) checked="checked" @endif>병
             </form>
 
             @if(isset($array))
