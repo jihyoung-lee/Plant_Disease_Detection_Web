@@ -8,10 +8,13 @@
  
  딥러닝을 이용한 과수 병해충 피해 판별 시스템
  
- 웹
+ web
+ 
+ 
  laravel 8
  Ubuntu 18.04
  PHP 7.4
  Nginx
  MariaDB
+ 
  
