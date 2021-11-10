@@ -13,7 +13,7 @@ class DiseaseController extends Controller
 {
 
     /*disease_list*/
-    public function disease_list(Request $request)
+    public function index(Request $request)
     {
         /*request variable*/
         $serviceCode = "SVC01";
@@ -43,25 +43,40 @@ class DiseaseController extends Controller
         /* param Url */
         $param = "&serviceCode=".$serviceCode."&serviceType=".$serviceType.$paramStr.$paramSearch."&displayCount=".$displayCount;
         $xml = $this->call_api($param);
-        if($xml->totalCount != 0){
+
+        /* json 구조가 달라 따로 처리*/
+        if($xml->totalCount > 1){
             $array = $xml->list;
             $json = json_decode( json_encode( $array ), 1 );
 
-            $data = $json['item'] ;}
+            $data = $json['item'] ;
+
+        }
         # xml 배열이 비어있으면 빈 배열을 변수에 넣음
+        elseif($xml->totalCount=1){
+            $array = $xml->list->item;
+            $data = json_decode( json_encode( $array ), 1 );
+        }
         else{
             $data = [];
         }
-        $param = "&serviceCode=".$serviceCode."&serviceType=".$serviceType.$paramStr.$paramSearch."&displayCount=".$displayCount;
-
 
         /*pagination*/
         $CollectionObj = collect($data);
         $array = $this->paginate($CollectionObj);
         $array->withPath('/test/?search='.$paramSearch);
 
+        return view('board',compact('array','paramSearch','type','xml','data'));
 
-        return view('list.disease_list',compact('array','paramSearch','type'));
+    }
+
+    public function info($cropName,$sickNameKor){
+        //요청변수들
+        $serviceCode = "SVC05";
+        $sickKey = $this->key_search($cropName,$sickNameKor); //sickKey 받아오는 메서드
+        $param = "&serviceCode=".$serviceCode."&sickKey=".$sickKey;
+        $array = $this->call_api($param);
+        return view('info',['array'=>$array,'name'=>$cropName,'sick'=>$sickNameKor]);
 
     }
 
@@ -80,6 +95,23 @@ class DiseaseController extends Controller
         $test = Http::GET($url);
         $xml = simplexml_load_string($test);
         return $xml;
+    }
+    /**
+     * sickKey search 질병 정보 api 호출 키 검색
+     *
+     * @param string $cropName 작물 명
+     * @param string $sickNameKor 병 한글 명
+     *
+     * @return Property sickKey 값
+     */
+    public function key_search(string $cropName, string $sickNameKor)
+    {
+        $serviceCode = "SVC01";
+        $serviceType = "AA001:XML";
+        $param = "&serviceCode=".$serviceCode."&serviceType=".$serviceType."&cropName=".$cropName."&sickNameKor=".$sickNameKor;
+        $xml = $this->call_api($param);
+        $sickKey = $xml->list->item->sickKey;
+        return $sickKey;
     }
 
     /**
