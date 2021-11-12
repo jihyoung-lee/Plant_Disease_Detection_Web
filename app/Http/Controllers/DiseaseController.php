@@ -50,7 +50,7 @@ class DiseaseController extends Controller
             $json = json_decode( json_encode( $array ), 1 );
             $data = $json['item'] ;
         }
-        # xml 배열이 비어있으면 빈 배열을 변수에 넣음
+        /* xml 배열이 비어있으면 빈 배열을 변수에 넣음 */
         elseif($xml->totalCount=1){
             $array = $xml->list->item;
             $data = json_decode( json_encode( $array ), 1 );
