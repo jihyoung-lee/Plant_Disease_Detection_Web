@@ -21,7 +21,7 @@ class ClassifierController extends Controller
         )->post($url); # 파일을 multipart 요청으로 전송
 
         /* api 서버와의 연결이 끊겼을 경우 */
-        if ($response->json('cropName',JSON_UNESCAPED_UNICODE) == 256)
+        if ($response->json('cropName') == 256)
         {
             return redirect()->back()->withErrors(['error' => '서버와의 연결이 끊겼습니다']);
         }
