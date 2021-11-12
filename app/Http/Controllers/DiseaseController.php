@@ -48,9 +48,7 @@ class DiseaseController extends Controller
         if($xml->totalCount > 1){
             $array = $xml->list;
             $json = json_decode( json_encode( $array ), 1 );
-
             $data = $json['item'] ;
-
         }
         # xml 배열이 비어있으면 빈 배열을 변수에 넣음
         elseif($xml->totalCount=1){
@@ -90,8 +88,9 @@ class DiseaseController extends Controller
     public function call_api(string $param)
     {
         $apiKey = env('apiKey');
+        $ncpmUrl = env('ncpmUrl');
         $parameter = "apiKey=" . $apiKey.$param;
-        $url = "http://ncpms.rda.go.kr/npmsAPI/service?" . $parameter;
+        $url = $ncpmUrl. $parameter;
         $test = Http::GET($url);
         $xml = simplexml_load_string($test);
         return $xml;
