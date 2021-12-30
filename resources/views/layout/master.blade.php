@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('layouts.header_css')
-    <title>@yield('title','병해충 판별 시스템')</title>
+    @yield('title','작물 병해 진단 시스템')
 </head>
 <body>
-@include('layouts/navbar')
+@yield('nav',View::make('layouts.navbar'))
 @yield('content')
 @include('layouts.footer')
 </body>
+@include('layouts.footer_js')
+@yield('script')
 </html>
