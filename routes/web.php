@@ -24,8 +24,17 @@ Route::match(['post','get'],'/file/{id}',[AdminController::class,'adminUpdate'])
 Route::delete('/{id}', [AdminController::class, 'delete'])->name('admin.delete');
 
 /* Classifier */
-Route::match(['post','get'],'/Classifier', [ClassifierController::class, 'store'])->name('Classifier.index');
+Route::get('/dashboard', [PhotoController::class, 'show'])->name('photo.index');
+Route::match(['post','get'],'/photo', [PhotoController::class, 'store'])->name('photo.store');
+Route::match(['post','get'],'/opinion/{id}',[AdminController::class,'opinionStore'])->name('photo.opinion');
 
-/* Disease list */
-Route::match(['post','get'],'/list/', [DiseaseController::class, 'index'])->name('list.index');
-Route::get('/info/{cropName?}/{sickNameKor?}', [DiseaseController::class, 'info'])->name('info.index');
+/* Search Page */
+Route::match(['post','get'],'/list/', [SearchController::class, 'index'])->name('search.index');
+Route::get('/info/{cropName?}/{sickNameKor?}', [SearchController::class, 'infoIndex'])->name('info.index');
+
+/* Auth */
+Route::get('/sign', [UserController::class,'index'])->name('user.index');
+Route::match(['post','get'],'/sign1',[UserController::class,'store'])->name('user.store');
+Route::get('/login',[LoginController::class,'index'])->name('login.index');
+Route::match(['post','get'],'/login1',[LoginController::class,'login'])->name('login.login');
+Route::get('/logout',[LoginController::class,'logout'])->name('login.logout');
