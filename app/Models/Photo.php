@@ -10,10 +10,9 @@ class Photo extends Model
     use HasFactory;
     protected $fillable = [
         'url',
-        'hashname',
-        'originalname',
-        'accuracy',
         'cropName',
-        'sickNameKor'
+        'sickNameKor',
+        'confidence'
     ];
+    public $timestamps = True;
 }
