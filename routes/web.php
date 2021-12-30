@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/* Main Page */
+Route::view('/', 'home');
 
-/* Home */
-Route::get('/', [HomeController::class, 'show'])->name('home.index');
-Route::delete('home/{id}', [HomeController::class, 'delete'])->name('leaves.delete');
+/* Admin Page */
+Route::get('/admin', [AdminController::class, 'admin'])->name('admin.index')->middleware('login');
+Route::match(['post','get'],'/file/{id}',[AdminController::class,'adminUpdate'])->name('admin.update');
+Route::delete('/{id}', [AdminController::class, 'delete'])->name('admin.delete');
 
 /* Classifier */
 Route::match(['post','get'],'/Classifier', [ClassifierController::class, 'store'])->name('Classifier.index');
