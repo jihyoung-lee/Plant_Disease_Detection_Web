@@ -24,6 +24,7 @@
  
 ![image](https://user-images.githubusercontent.com/67559886/160347627-cd62d3d7-1dba-41b3-8a9f-56979bc2b842.png)
 ![image](https://user-images.githubusercontent.com/67559886/160349497-e0568200-07df-469c-9a2f-a67d5ddec1a2.png)
+![슬라이드16](https://user-images.githubusercontent.com/67559886/192137265-d709e7fc-0cad-4cfb-9627-83280e433ac5.PNG)
 
 ## Screenshot 🖼
 
