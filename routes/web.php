@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\DiseaseController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ClassifierController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
