@@ -3336,7 +3336,7 @@
     }
   }
 
-  // Composite means it takes into account transforms as well as layout.
+  // Composite means it takes into account transforms as well as layouts.
 
   function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
     if (isFixed === void 0) {

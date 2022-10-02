@@ -58,7 +58,7 @@ class SearchController extends Controller
         $array = $this->paginate($CollectionObj);
         $array->withPath('/list/?search='.$paramSearch);
 
-        return view('search',compact('array','paramSearch','type','xml','data'));
+        return view('list/disease_list',compact('array','paramSearch','type','xml','data'));
         }
 
     /* 상세정보 화면 */
