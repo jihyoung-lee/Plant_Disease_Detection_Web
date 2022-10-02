@@ -25,7 +25,6 @@ https://user-images.githubusercontent.com/67559886/193434100-00ff047b-cf13-4cdb-
  AWS S3
  
  
-https://user-images.githubusercontent.com/67559886/193434100-00ff047b-cf13-4cdb-91be-524e2b92bee4.mp4
 
 ![image](https://user-images.githubusercontent.com/67559886/160347627-cd62d3d7-1dba-41b3-8a9f-56979bc2b842.png)
 ![image](https://user-images.githubusercontent.com/67559886/160349497-e0568200-07df-469c-9a2f-a67d5ddec1a2.png)
