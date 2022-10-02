@@ -1,4 +1,4 @@
-<?php
+
 @if ($paginator->hasPages())
     <style>
         .page-item.active .page-link {

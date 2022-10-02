@@ -64,7 +64,7 @@ class SearchController extends Controller
     /* 상세정보 화면 */
     public function infoIndex($cropName, $sickNameKor){
         $array = $this->info($cropName,$sickNameKor);
-        return view('info',['array'=>$array,'name'=>$cropName,'sick'=>$sickNameKor]);
+        return view('list/info',['array'=>$array,'name'=>$cropName,'sick'=>$sickNameKor]);
     }
 
     /* Info API Request */

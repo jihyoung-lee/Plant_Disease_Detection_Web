@@ -8,31 +8,29 @@
 
 @section('content')
     <style>
-        .table{
+        .table {
             --bs-table-hover-bg: #a5dcc387;
         }
     </style>
     <br>
-    <div class="container">
+    <div class="container"style="padding-top:100px;">
 
         <header>
             <h1>병해충 도감</h1>
         </header>
         <article id="board_area">
-            <form action="/test/" method="POST">
+            <form action="{{route('search.index')}}" method="POST">
                 @csrf
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="검색어를 입력하세요" name="search" required value="{{$paramSearch}}">
+                <div class="input-group input-group-lg" >
+                    <select name="type" class="form-select form-select" aria-label=".form-select-lg ">
+                        <option value="1"@if($type == 1) selected @endif>작물 명</option>
+                        <option value="2"@if($type == 2) selected @endif>병 명</option>
+                    </select>
+                    <input type="text" maxlength="15"  style="width: 800px" class="form-control" placeholder="Search for..." name="search" required value="{{$paramSearch}}">
                     <span class="input-group-btn">
-                <button class="btn btn-success btn-lg"><i class="bi bi-search"></i>검색</button></span>
-
-                <select name="type" class="form-select form-select" aria-label=".form-select-lg keyword">
-                    <option value="1"@if($type == 1) selected @endif>작물 명</option>
-                    <option value="2"@if($type == 2) selected @endif>병 명</option>
-                </select>
+            <button class="btn btn-success btn-lg"><i class="bi bi-search"></i>검색</button></span>
                 </div>
             </form>
-
             @if(isset($array))
                 <table class="table table-hover">
                     <thead>
