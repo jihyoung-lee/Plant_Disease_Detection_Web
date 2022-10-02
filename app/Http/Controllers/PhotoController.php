@@ -14,7 +14,7 @@ class PhotoController extends Controller
         $DB = DB::table('train');
         $Photos = $DB->latest()->paginate(5);
 
-        return view('dashboard', ['Photos' => $Photos]);
+        return view('list/dashboard', ['Photos' => $Photos]);
     }
 
     public function opinionStore(Request $request,$id): \Illuminate\Http\RedirectResponse
