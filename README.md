@@ -8,6 +8,9 @@
  
  딥러닝을 이용한 작물 병해충 피해 판별 시스템
  
+ ## 시연 영상🎞
+https://user-images.githubusercontent.com/67559886/193434100-00ff047b-cf13-4cdb-91be-524e2b92bee4.mp4
+ 
  ## Environment ⚙
  
  web
@@ -22,6 +25,7 @@
  AWS S3
  
  
+
 ![image](https://user-images.githubusercontent.com/67559886/160347627-cd62d3d7-1dba-41b3-8a9f-56979bc2b842.png)
 ![image](https://user-images.githubusercontent.com/67559886/160349497-e0568200-07df-469c-9a2f-a67d5ddec1a2.png)
 ![슬라이드16](https://user-images.githubusercontent.com/67559886/192137265-d709e7fc-0cad-4cfb-9627-83280e433ac5.PNG)
@@ -47,4 +51,7 @@
 >**Admin**
 
 ![image](https://user-images.githubusercontent.com/67559886/160355580-d009f4dc-6191-47ad-83b4-e708ab3f9e12.png)
+
+
+
 
