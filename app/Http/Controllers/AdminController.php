@@ -24,25 +24,43 @@ class AdminController extends Controller
 
     public function adminUpdate($id){
         DB::table('train')->where('id','=',$id)->update(['modify'=>1]);
-
-        # 데이터베이스 값
-        $cropName = DB::table('train')->where('id','=',$id)->value('cropName');
-        $sickNameKor = DB::table('train')->where('id','=',$id)->value('sickNameKor');
-        $url = $cropName.'_'.$sickNameKor;
-
-        #파일 경로 슬라이스
-        $filename = DB::table('train')->where('id','=',$id)->value('url');
-        $userOpinion = DB::table('train')->where('id','=',$id)->value('userOpinion');
-        $class = class_basename($filename);
-        Storage::disk('s3')->move('public/'.$url.'/'.$class, 'public/'.$userOpinion.'/'.$class);
-        $slice = Str::before($filename, '/public/');
-        $urlUpdate =$slice.'/public/'.$userOpinion.'/'.$class;
-
-        DB::table('train')->where('id','=',$id)->update(['url' => $urlUpdate]);
-        DB::table('train')->where('id','=',$id)->update(['modify'=>1]);
+        $url = $this->getUrl($id);
+        $this->SliceFileDir($id, $url);
 
         return redirect()->back()->with([
             'status' => '수정완료'
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function getUrl($id): string
+    {
+# 데이터베이스 값
+        $cropName = DB::table('train')->where('id', '=', $id)->value('cropName');
+        $sickNameKor = DB::table('train')->where('id', '=', $id)->value('sickNameKor');
+        $url = $cropName . '_' . $sickNameKor;
+        return $url;
+    }
+
+    /**
+     * @param $id
+     * @param string $url
+     * @return void
+     */
+    public function SliceFileDir($id, string $url): void
+    {
+        #파일 경로 슬라이스
+        $filename = DB::table('train')->where('id', '=', $id)->value('url');
+        $userOpinion = DB::table('train')->where('id', '=', $id)->value('userOpinion');
+        $class = class_basename($filename);
+        Storage::disk('s3')->move('public/' . $url . '/' . $class, 'public/' . $userOpinion . '/' . $class);
+        $slice = Str::before($filename, '/public/');
+        $urlUpdate = $slice . '/public/' . $userOpinion . '/' . $class;
+
+        DB::table('train')->where('id', '=', $id)->update(['url' => $urlUpdate]);
+        DB::table('train')->where('id', '=', $id)->update(['modify' => 1]);
     }
 }
