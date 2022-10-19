@@ -14,14 +14,7 @@ class SearchController extends Controller
     /* Search Result */
     public function index(Request $request)
     {
-        //요청변수들
-        $serviceCode = "SVC01";
-        $serviceType = "AA001:XML";
-        $displayCount = 50;
-        //검색 디폴트 값
-        $paramSearch = $request->input('search','사과');
-        $paramStr =  "&cropName=";
-        $type = 1;
+        list($serviceCode, $serviceType, $displayCount, $paramSearch, $paramStr, $type) = $this->diseaseApiRequest($request);
         //작물
         if($request->input('type')==1){
             $paramSearch =  $request->input('search');
@@ -35,8 +28,9 @@ class SearchController extends Controller
             $paramStr =  "&sickNameKor=";
             $type = 2;
         }
+            $envVarName = 'apiKey';
             $param = "&serviceCode=".$serviceCode."&serviceType=".$serviceType.$paramStr.$paramSearch."&displayCount=".$displayCount;
-            $xml = $this->call_api($param);
+            $xml = $this->callApi($param,$envVarName);
 
             if($xml->totalCount > 1){
                 $array = $xml->list;
@@ -71,9 +65,9 @@ class SearchController extends Controller
     public function info($cropName,$sickNameKor){
      //요청변수들
      $serviceCode = "SVC05";
-     $sickKey = $this->key_search($cropName,$sickNameKor); //sickKey 받아오는 메서드
+     $sickKey = $this->apiKeySearch($cropName,$sickNameKor); //sickKey 받아오는 메서드
      $param = "&serviceCode=".$serviceCode."&sickKey=".$sickKey;
-     $array = $this->call_api($param);
+     $array = $this->callApi($param);
 
      return $array;
  }
@@ -104,9 +98,9 @@ class SearchController extends Controller
      *
      * @return Property xml 배열
      */
-    public function call_api(string $param)
+    public function callApi(string $param, $envVarApiName)
     {
-        $apiKey = env('apiKey');
+        $apiKey = env($envVarApiName);
         $parameter = "apiKey=" . $apiKey.$param;
         $url = "http://ncpms.rda.go.kr/npmsAPI/service?" . $parameter;
         $test = Http::GET($url);
@@ -122,15 +116,32 @@ class SearchController extends Controller
      *
      * @return Property sickKey 값
      */
-    public function key_search(string $cropName, string $sickNameKor)
+    public function apiKeySearch(string $cropName, string $sickNameKor): Property
     {
         $serviceCode = "SVC01";
         $serviceType = "AA001:XML";
         $param = "&serviceCode=".$serviceCode."&serviceType=".$serviceType."&cropName=".$cropName."&sickNameKor=".$sickNameKor;
-        $xml = $this->call_api($param);
+        $xml = $this->callApi($param);
         $sickKey = $xml->list->item->sickKey;
 
         return $sickKey;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function diseaseApiRequest(Request $request): array
+    {
+//요청변수들
+        $serviceCode = "SVC01";
+        $serviceType = "AA001:XML";
+        $displayCount = 50;
+        //검색 디폴트 값
+        $paramSearch = $request->input('search', '사과');
+        $paramStr = "&cropName=";
+        $type = 1;
+        return array($serviceCode, $serviceType, $displayCount, $paramSearch, $paramStr, $type);
     }
 
 
