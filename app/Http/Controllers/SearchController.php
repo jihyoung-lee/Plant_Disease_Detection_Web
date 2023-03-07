@@ -126,23 +126,28 @@ class SearchController extends Controller
 
         return $sickKey;
     }
+public function diseaseApiRequest(Request $request): array
+{
+    // 요청 변수 상수 선언
+    const SERVICE_CODE = 'SVC01';
+    const SERVICE_TYPE = 'AA001:XML';
+    const DISPLAY_COUNT = 50;
+    const PARAM_STR = '&cropName=';
 
-    /**
-     * @param Request $request
-     * @return array
-     */
-    public function diseaseApiRequest(Request $request): array
-    {
-//요청변수들
-        $serviceCode = "SVC01";
-        $serviceType = "AA001:XML";
-        $displayCount = 50;
-        //검색 디폴트 값
-        $paramSearch = $request->input('search', '사과');
-        $paramStr = "&cropName=";
-        $type = 1;
-        return array($serviceCode, $serviceType, $displayCount, $paramSearch, $paramStr, $type);
-    }
+    // 검색어 요청 변수 선언
+    $paramSearch = $request->input('search', '사과');
 
+    // type: 1은 검색 결과를 보여줄 때 사용하는 변수
+    $type = 1;
+
+    return [
+        SERVICE_CODE,
+        SERVICE_TYPE,
+        DISPLAY_COUNT,
+        $paramSearch,
+        PARAM_STR,
+        $type
+    ];
+}
 
 }
