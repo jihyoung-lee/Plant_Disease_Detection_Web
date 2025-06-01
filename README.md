@@ -1,4 +1,6 @@
 # Plant_Disease_Detection_Web
+Looking for Version 2 with a Laravel backend and Vue.js frontend separation?  
+👉 [Click here!](https://github.com/jihyoung-lee/-Plant_Disease_Detection_Web_v2)
 
 국립순천대학교 ICT 융합공학부 멀티미디어공학 전공 2021년 캡스톤디자인 졸업프로젝트
  
